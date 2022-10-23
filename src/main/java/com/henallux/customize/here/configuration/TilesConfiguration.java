@@ -15,7 +15,6 @@ public class TilesConfiguration {
     public TilesConfigurer tilesConfigurer(){
         final TilesConfigurer configurer = new TilesConfigurer();
         configurer.setDefinitions("/WEB-INF/resources/tiles.xml");
-        configurer.setCheckRefresh(true);
         return configurer;
     }
 
