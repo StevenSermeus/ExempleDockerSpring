@@ -1,12 +1,17 @@
 FROM openjdk:17-alpine
 
+EXPOSE 8080
+
+RUN apk update
+
+RUN apk add maven openjdk8
+
 WORKDIR /app
 
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-RUN sed -i 's/\r$//' mvnw ./mvnw
-RUN ./mvnw dependency:go-offline
+COPY pom.xml /app/
 
-COPY src ./src
+COPY ./src /app/src/
 
-CMD ["./mvnw", "spring-boot:run"]
+RUN mvn clean install
+
+CMD ["mvn", "spring-boot:run"]
